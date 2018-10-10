@@ -1,13 +1,14 @@
 #include "GenStack.h"
 #include "FileRead.h"
 #include <iostream>
+#include <fstream> //(?)
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
   //trying to make cmd line arg work
-  string FileName;
+  //string FileName;
   cout << "Enter a source code file to analyze" << endl;
   cout << "Analyzing 'Input.cpp'..." << endl;
   //cin >> FileName;
@@ -15,41 +16,72 @@ int main(int argc, char **argv)
   FileRead* file = new FileRead("Input.cpp");
   //file->printFile();
 
-  /*for (int i = 0; i < file->line_no; i++)
-  {
-    cout << "Line number: " << i + 1 << endl;
-    cout << file->getLine(i) << endl;
-  }; */
-
   GenStack<string> codeLines();
-  GenStack<char> errorLine();
+  GenStack<char> delim;
 
   int i = 0;
   while(i < file->line_no)
   {
-    int j = file->getLine(i).length();
-    int k;
-    cout << "number of chars in  " << i + 1 << " : " << j << endl;
-    while(k < j)
+    int j = 0;
+    string line = file->getLine(i);
+    while(j < line.length())
     {
-      
+      if (line[j] == '(')
+      {
+        delim.push(line[j]);
+      }
+
+      else if (line[j] == '[')
+      {
+        delim.push(line[j]);
+      }
+
+      else if (line[j] == ')')
+      {
+        if (delim.isEmpty())
+        {
+          cout << "Missing '(' at line " << i << endl;
+          //turn into system exit /////////////
+          break;
+        }
+
+        else if (delim.peek() == '(')
+        {
+          delim.pop();
+        }
+      }
+
+      else if (line[j] == ']')
+      {
+        if (delim.isEmpty())
+        {
+          cout << "Missing '[' at line " << i << endl;
+          //system.exit needed////////
+          break;
+        }
+
+        else if (delim.peek() == '[')
+        {
+          delim.pop();
+        }
+      }
+      j++;
     }
+
+    if (!delim.isEmpty())
+    {
+      cout << "Missing ')' at line " << i << endl;
+      break;
+    }
+
+      //make file line an object
+      //iterate through each char
+      //if it is a [{( add to stack
+      //if it is )}] then pop (if a match)
+      //store the index of the stack
     i++;
   }
 
-  /*int i = 0;
-
-  while(i < file->line_no)
-  {
-    int j = 0;
-
-    while(j < file->getLine(i).length())
-    {
-
-    }
-
-    i++;
-  } */
   /*GenStack<char> myStack(10);
 
   myStack.push('R');

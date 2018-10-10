@@ -41,6 +41,7 @@ public:
   X *myArray;
 } ;
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 GenStack<X>::GenStack() //default constructor
 {
@@ -49,6 +50,7 @@ size = maxSize;
 top = -1;
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 GenStack<X>::GenStack(int maxSize) //overloaded constructor
 {
@@ -57,6 +59,7 @@ GenStack<X>::GenStack(int maxSize) //overloaded constructor
   top = -1;
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 GenStack<X>::~GenStack()
 {
@@ -65,6 +68,7 @@ GenStack<X>::~GenStack()
   cout << "stack destroyed" << endl;
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 void GenStack<X>::push(X data)
 {
@@ -85,6 +89,7 @@ void GenStack<X>::push(X data)
   //you are responsible for error and bound checking
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 X GenStack<X>::pop()
 {
@@ -104,24 +109,28 @@ X GenStack<X>::pop()
   return myArray[top--];
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 X GenStack<X>::peek()
 {
   return myArray[top];
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 bool GenStack<X>::isFull()
 {
   return (top == size-1);
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 bool GenStack<X>::isEmpty()
 {
   return (top == -1);
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 void GenStack<X>::resize()
 {
@@ -136,6 +145,7 @@ void GenStack<X>::resize()
   size = size*2;
 }
 
+//////////////////////////////////////////////////////////////////////
 template <class X>
 void GenStack<X>::print()
 {
