@@ -47,7 +47,6 @@ GenStack<X>::GenStack() //default constructor
 {
   size = 10;
   myArray = new X[size];
-  //size = maxSize;
   top = -1;
 }
 
@@ -146,7 +145,7 @@ template <class X>
 void GenStack<X>::print()
 {
   //Print method was made for printing out all of the elements of the stack
-  //Usually useful for debugging rather than program performance
+  //Very useful for debugging and checking stack operations
   for (int i = 0; i <= top; i++)
   {
     cout << myArray[i] << " ";
