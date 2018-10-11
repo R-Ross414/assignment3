@@ -5,14 +5,15 @@
 #include <string>
 
 //////////////////////////////////////////////////////////////////////
-FileRead::FileRead()
+FileRead::FileRead() //default constructor
 {
   FileName = "";
   lines = NULL;
 }
 //////////////////////////////////////////////////////////////////////
-FileRead::FileRead(string fileName)
+FileRead::FileRead(string fileName) //overloaded constructor
 {
+  //this constructor handles most of the initial processing of the source code
   FileName = fileName;
   Stream.open(fileName);
   string line = "";
@@ -38,9 +39,10 @@ FileRead::FileRead(string fileName)
   }
 }
 //////////////////////////////////////////////////////////////
-FileRead::~FileRead() {}
+FileRead::~FileRead() {} //destructor
+
 //////////////////////////////////////////////////////////////
-void FileRead::printFile()
+void FileRead::printFile() //void method for printing the file lines
 {
   string line = "";
 
@@ -53,7 +55,7 @@ void FileRead::printFile()
   Stream.open(FileName);
 }
 //////////////////////////////////////////////////////////////
-string FileRead::getLine(int linenum)
+string FileRead::getLine(int linenum) //solely returns source code lines as strings 
 {
   return lines[linenum];
 }

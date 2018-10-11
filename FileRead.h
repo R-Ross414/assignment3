@@ -11,7 +11,6 @@ class FileRead
     gather information needed about the file */
     FileRead();
     FileRead(string FileName);
-    //FileRead(int argc); putting this on hold
     ~FileRead();
 
     /*Method #1 is a print method. Method #2 will be used to keep

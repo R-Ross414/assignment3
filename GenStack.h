@@ -62,57 +62,51 @@ GenStack<X>::GenStack(int maxSize) //overloaded constructor
 
 //////////////////////////////////////////////////////////////////////
 template <class X>
-GenStack<X>::~GenStack()
+GenStack<X>::~GenStack() //destructor
 {
-  //what do i need to do here?
   delete[] myArray;
-  cout << "stack destroyed" << endl;
 }
 
 //////////////////////////////////////////////////////////////////////
 template <class X>
-void GenStack<X>::push(X data)
+void GenStack<X>::push(X data) //manually creating 'push'
 {
-  //add error -> check if not full
   try
   {
     if (isFull())
     {
-      throw overflow;
+      throw overflow; //exception if stack is full
     }
     myArray[++top] = data;
   }
   catch (GenStackOverflow e)
   {
-    this->resize();
+    this->resize(); //invokes method for resizing size of stack
     this->push(data);
   }
-  //you are responsible for error and bound checking
 }
 
 //////////////////////////////////////////////////////////////////////
 template <class X>
-X GenStack<X>::pop()
+X GenStack<X>::pop() //manually creating pop
 {
-  //error checks
   try
   {
     if (isEmpty())
     {
-      throw underflow;
+      throw underflow; //exception for if the stack is empty
     }
   }
   catch (GenStackUnderflow e)
   {
     cout << "Stack is empty" << endl;
   }
-  //check if isEmpty
   return myArray[top--];
 }
 
 //////////////////////////////////////////////////////////////////////
 template <class X>
-X GenStack<X>::peek()
+X GenStack<X>::peek() //manually creating 'peek'
 {
   return myArray[top];
 }
@@ -135,6 +129,7 @@ bool GenStack<X>::isEmpty()
 template <class X>
 void GenStack<X>::resize()
 {
+  //this method is for the purpose of increasing the stack size if it is full
   X* newArray = new X[size*2];
   for (int i = 0; i <= top; i++)
   {
@@ -147,11 +142,11 @@ void GenStack<X>::resize()
 }
 
 //////////////////////////////////////////////////////////////////////
-
-
 template <class X>
 void GenStack<X>::print()
 {
+  //Print method was made for printing out all of the elements of the stack
+  //Usually useful for debugging rather than program performance
   for (int i = 0; i <= top; i++)
   {
     cout << myArray[i] << " ";

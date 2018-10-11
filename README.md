@@ -11,3 +11,8 @@ http://www.cplusplus.com/doc/oldtutorial/templates/
 http://www.cplusplus.com/doc/tutorial/exceptions/
 https://www.youtube.com/watch?v=U2QvTsMvWmM&t=533s
 https://www.geeksforgeeks.org/command-line-arguments-in-c-cpp/
+
+-Went to tutoring with Daniel Briseno
+-Online tutoring using Varsity Tutors
+
+Textbook: Data Structures & Algorithms in C++, 2nd Ed. (Goodrich - Tamassia - Mount)
