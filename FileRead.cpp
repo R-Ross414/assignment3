@@ -10,7 +10,6 @@ FileRead::FileRead()
   FileName = "";
   lines = NULL;
 }
-
 //////////////////////////////////////////////////////////////////////
 FileRead::FileRead(string fileName)
 {
@@ -38,9 +37,8 @@ FileRead::FileRead(string fileName)
     i++;
   }
 }
-
-FileRead::~FileRead(){}
-
+//////////////////////////////////////////////////////////////
+FileRead::~FileRead() {}
 //////////////////////////////////////////////////////////////
 void FileRead::printFile()
 {
@@ -54,7 +52,7 @@ void FileRead::printFile()
   Stream.close();
   Stream.open(FileName);
 }
-
+//////////////////////////////////////////////////////////////
 string FileRead::getLine(int linenum)
 {
   return lines[linenum];

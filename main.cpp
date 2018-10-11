@@ -1,4 +1,4 @@
-#include "GenStack.h"
+#include "ParseFile.h"
 #include "FileRead.h"
 #include <iostream>
 #include <fstream> //(?)
@@ -9,136 +9,73 @@ int main(int argc, char **argv)
 {
   bool Yes;
   Yes = true;
-
-////////////////////////////////////////////////////////////////////
-while(Yes)
-{
   string cmd = argv[1];
-  cout << "Enter a source code file to analyze" << endl;
-  cout << "Analyzing " << cmd << "..." << endl;
-  FileRead myfile(cmd);
-
-  //objects for the stack temp class
-  GenStack<char> delim;
 
 ////////////////////////////////////////////////////////////////////
-  int i = 0;
-  while (i < myfile.line_no)
+  while(Yes)
   {
-    int j = 0;
-    string line = myfile.getLine(i);
+    //cout << "Enter a source code file to analyze" << endl;
+    cout << "Analyzing " << cmd << "..." << endl;
+    FileRead myfile(cmd);
 
-    while(j < line.length())
+    //object for the stack temp class
+    GenStack<char>* delim = new GenStack<char>();
+
+  ////////////////////////////////////////////////////////////////////
+    int i = 0;
+    while (i < myfile.line_no)
     {
-////////////////////////////////////////////////////////////////////
-      if (line[j] == '(')
+      string line = myfile.getLine(i);
+      ParseLine(delim, line, i);
+
+  ////////////////////////////////////////////////////////////////////
+      if (!delim->isEmpty())
       {
-        delim.push(line[j]);
-      }
-      else if (line[j] == '[')
-      {
-        delim.push(line[j]);
-      }
-      else if (line[j] == '{')
-      {
-        delim.push(line[j]);
-      }
-////////////////////////////////////////////////////////////////////
-      else if (line[j] == ')')
-      {
-        if (delim.isEmpty())
+        if (delim->peek() != '{')
         {
-          cout << "Missing '(' at line " << endl;
-          //turn into system exit /////////////
-          break;
+          if (delim->peek() == '(')
+          {
+            cout << "Missing ) at line " << i + 1 << endl;
+          }
+          else if (delim->peek() == '[')
+          {
+            cout << "Missing ] at line " << i + 1 << endl;
+          }
         }
-        else if (delim.peek() == '(')
+        else
         {
-          delim.pop();
+          if (i = myfile.line_no - 1)
+          {
+            cout << "Missing } at line " << i << endl;
+          }
         }
       }
-////////////////////////////////////////////////////////////////////
-      else if (line[j] == ']')
-      {
-        //cout << "hello world" << endl;
-        if (delim.isEmpty())
-        {
-          cout << "Missing '[' at line " << endl;
-          //system.exit needed////////
-          break;
-        }
-        else if (delim.peek() != '[')
-        {
-          cout << "Missing '[' at line " << endl;
-          //system exit//////
-            break;
-        }
-        else if (delim.peek() == '[')
-        {
-          delim.pop();
-        }
-      }
-////////////////////////////////////////////////////////////////////
-  else if (line[j] == '}')
-  {
-    if (delim.isEmpty())
-    {
-      cout << "Missing '{' at line " << i << endl;
+  /*algorithm
+        //make file line an object
+        //iterate through each char
+        //if it is a [{( add to stack
+        //if it is )}] then pop (if a match)
+        //store the index of the stack */
+      i++;
     }
 
-    else if (delim.peek() == '{')
+  ////////////////////////////////////////////////////////////////////
+    char response;
+    cout << "Would you like to enter another file location?" << endl;
+    cout << "Enter 'Y' for yes, and 'N' for no." << endl;
+    cin >> response;
+
+    if(response == 'Y' || response == 'y')
     {
-      cout << "Popping '{'" << endl;
-      delim.pop();
+      cout << "Enter new file location" << endl;
+      cin >> cmd;
+      Yes = true;
+    }
+    if(response == 'N' || response == 'n')
+    {
+      Yes = false;
     }
   }
-
-////////////////////////////////////////////////////////////////////
-      j++;
-    }
-
-////////////////////////////////////////////////////////////////////
-    if (!delim.isEmpty())
-    {
-      if (delim.peek() == '(')
-      {
-        cout << "Missing ) at line " << i << endl;
-      }
-      else if (delim.peek() == '[')
-      {
-        cout << "Missing ] at line " << i << endl;
-      }
-      if (delim.peek() == '{')
-      {
-        cout << "Missing } at line " << i << endl;
-      }
-      break;
-    }
-
-      //make file line an object
-      //iterate through each char
-      //if it is a [{( add to stack
-      //if it is )}] then pop (if a match)
-      //store the index of the stack
-    i++;
-  }
-
-////////////////////////////////////////////////////////////////////
-char response;
-cout << "Would you like to enter another file location?" << endl;
-cout << "Enter 'Y' for yes, and 'N' for no." << endl;
-cin >> response;
-
-if(response == 'Y' || response == 'y')
-{
-  Yes = true;
-}
-if(response == 'N' || response == 'n')
-{
-  Yes = false;
-}
-
-}
 
 cout << "program done" << endl;
 

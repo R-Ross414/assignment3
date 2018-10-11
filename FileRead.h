@@ -29,5 +29,4 @@ class FileRead
     string* lines;
     int line_no;
 
-
 };

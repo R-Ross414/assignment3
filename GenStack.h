@@ -45,9 +45,10 @@ public:
 template <class X>
 GenStack<X>::GenStack() //default constructor
 {
-myArray = new X[size];
-size = maxSize;
-top = -1;
+  size = 10;
+  myArray = new X[size];
+  //size = maxSize;
+  top = -1;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -146,6 +147,8 @@ void GenStack<X>::resize()
 }
 
 //////////////////////////////////////////////////////////////////////
+
+
 template <class X>
 void GenStack<X>::print()
 {
