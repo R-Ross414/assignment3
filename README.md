@@ -4,7 +4,7 @@ Rachel Ross
 ID #2294513
 rross@chapman.edu
 CPSC350-02
-Assignment 3
+Assignment 3 - Syntax Checker 
 
 List of Resources Used:
 http://www.cplusplus.com/doc/oldtutorial/templates/
